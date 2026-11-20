@@ -10,11 +10,13 @@ public class EnemySpawner : MonoBehaviour
     //Use serialized field for easy editing of enemy speed
     [SerializeField]
     private float enemySpeed = 10f;
+    private float randomSpeed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //Generic for getting the rigidbody component
         rb = GetComponent<Rigidbody>();
+        randomSpeed = Random.Range(.5f,2f);
     }
 
     // Update is called once per frame
@@ -22,7 +24,9 @@ public class EnemySpawner : MonoBehaviour
     {
         Vector3 dir = player.position - transform.position;
         dir = dir.normalized;
-        rb.AddForce(dir * enemySpeed);
+        rb.AddForce(dir * enemySpeed*randomSpeed);
+        //OnCollisionEnter();
 
     }
+    
 }
